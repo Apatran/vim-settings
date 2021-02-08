@@ -1,3 +1,4 @@
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -32,6 +33,9 @@ Plugin 'doums/darcula', { 'name': 'darcula' }
 Plugin 'frazrepo/vim-rainbow'
 Plugin 'ycm-core/YouCompleteMe'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'fatih/vim-go'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -55,6 +59,7 @@ filetype plugin indent on    " required
 
 syntax enable
 colorscheme darcula
+set tags=tags
 set termguicolors
 set number
 let g:rainbow_active = 1
@@ -63,6 +68,39 @@ set laststatus=2
 if !has('gui_running')
   set t_Co=256
 endif
+let &t_TI = ""
+let &t_TE = ""
+
+
+let g:tagbar_type_go = {
+	\ 'ctagstype' : 'go',
+	\ 'kinds'     : [
+		\ 'p:package',
+		\ 'i:imports:1',
+		\ 'c:constants',
+		\ 'v:variables',
+		\ 't:types',
+		\ 'n:interfaces',
+		\ 'w:fields',
+		\ 'e:embedded',
+		\ 'm:methods',
+		\ 'r:constructor',
+		\ 'f:functions'
+	\ ],
+	\ 'sro' : '.',
+	\ 'kind2scope' : {
+		\ 't' : 'ctype',
+		\ 'n' : 'ntype'
+	\ },
+	\ 'scope2kind' : {
+		\ 'ctype' : 't',
+		\ 'ntype' : 'n'
+	\ },
+	\ 'ctagsbin'  : 'gotags',
+	\ 'ctagsargs' : '-sort -silent'
+\ }
+
+
 
 let g:lightline = {
       \ 'colorscheme': 'darculaOriginal',
@@ -75,9 +113,11 @@ let g:lightline = {
       \ },
       \ }
 
-
-
 let g:NERDTreeNodeDelimiter = "\u00a0"
+
+
+nnoremap <f7> :NERDTreeToggle<CR>
+
 
 " Start NERDTree and put the cursor back in the other window.
 autocmd VimEnter * NERDTree | wincmd p
@@ -101,3 +141,4 @@ autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
 " Exit Vim if NERDTree is the only window left.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
     \ quit | endif
+
