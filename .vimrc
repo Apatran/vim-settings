@@ -28,8 +28,10 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'itchyny/lightline.vim'
 Plugin 'preservim/nerdtree'
 Plugin 'dracula/vim', { 'name': 'dracula' }
+Plugin 'doums/darcula', { 'name': 'darcula' }
 Plugin 'frazrepo/vim-rainbow'
 Plugin 'ycm-core/YouCompleteMe'
+Plugin 'jiangmiao/auto-pairs'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -52,9 +54,28 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 syntax enable
-colorscheme dracula
-
+colorscheme darcula
+set termguicolors
+set number
+let g:rainbow_active = 1
 set mouse=a
+set laststatus=2
+if !has('gui_running')
+  set t_Co=256
+endif
+
+let g:lightline = {
+      \ 'colorscheme': 'darculaOriginal',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
+
+
 
 let g:NERDTreeNodeDelimiter = "\u00a0"
 
