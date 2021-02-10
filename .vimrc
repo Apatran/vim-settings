@@ -36,6 +36,7 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'fatih/vim-go'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
+Plugin 'psliwka/vim-smoothie'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -62,9 +63,14 @@ colorscheme darcula
 set tags=tags
 set termguicolors
 set number
-let g:rainbow_active = 1
+let g:rainbow_active=1
+let NERDTreeShowHidden=1
 set mouse=a
 set laststatus=2
+set noswapfile
+"set backupdir=~/.vim/backup//
+"set directory=~/.vim/swap//
+"set undodir=~/.vim/undo//
 if !has('gui_running')
   set t_Co=256
 endif
@@ -116,8 +122,9 @@ let g:lightline = {
 let g:NERDTreeNodeDelimiter = "\u00a0"
 
 
+" Key mappings ""
 nnoremap <f7> :NERDTreeToggle<CR>
-
+"nnoremap <A-q> :GoDebugBreakpoint<CR> 
 
 " Start NERDTree and put the cursor back in the other window.
 autocmd VimEnter * NERDTree | wincmd p
