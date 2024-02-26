@@ -60,6 +60,7 @@ filetype plugin indent on    " required
 syntax enable
 colorscheme darcula
 set tabstop=4
+set shiftwidth=4
 set tags=tags;/
 set termguicolors
 set number
